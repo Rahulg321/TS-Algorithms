@@ -1,5 +1,8 @@
 /* 
     in a binary tree, each node has exactly two child Nodes, nothing else
+    this insert function maintains order of elements in binary tree
+    since we are maintaining order this type of tree is known as binary search tree
+    left node is smaller than the root and right node is bigger than the root
 */
 
 class BinaryTreeNode {
@@ -26,7 +29,7 @@ class BinaryTree {
   }
 
   insert(value: number | null) {
-    if (!value) {
+    if (value === null || value === undefined) {
       return;
     }
 
@@ -40,9 +43,6 @@ class BinaryTree {
   }
 
   insertNode(node: BinaryTreeNode, newNode: BinaryTreeNode) {
-    // this insert function maintains order of elements in binary tree
-    // since we are maintaining order this type of tree is known as binary search tree
-
     if (newNode.val < node.val) {
       if (node.left === null) {
         console.log("inserted node at the left");
@@ -118,6 +118,108 @@ class BinaryTree {
     console.log(rootNode.val);
   }
 
+  delete(value: number) {
+    return this.deleteNode(this.rootNode, value);
+  }
+
+  deleteNode(node: BinaryTreeNode | null, value: number) {
+    if (!node) return node;
+
+    // since we have the order maintained in this tree we can traverse accordingly
+    if (value > node.val) {
+      node.right = this.deleteNode(node.right, value);
+    } else if (value < node.val) {
+      node.left = this.deleteNode(node.left, value);
+    } else {
+      // check if the node to be deleted has any children or not
+
+      // whatever we return updates the pointer of the parent node
+      if (!node.left && !node.right) {
+        return null;
+      }
+
+      if (node.left === null) {
+        return node.right;
+      }
+
+      if (node.right === null) {
+        return node.left;
+      }
+
+      // the node to delete has two children then we need to find the successor
+      // the successor is the smallest node in the right subtree
+      let smallestNode = this.minValueNode(node.right);
+      // if (smallestNode) {
+      //   node.val = smallestNode.val;
+      // }
+
+      // The syntax temp! in TypeScript is known as the non-null assertion operator. It tells the TypeScript compiler that you are sure the expression temp is not null or undefined at that point in the code. This can be useful when you, as the developer, know more about the code than the compiler can infer, and you want to override TypeScript's type-checking.
+
+      node.val = smallestNode!.val;
+
+      node.right = this.deleteNode(node.right, smallestNode!.val);
+    }
+
+    return node;
+  }
+
+  findMode(root: BinaryTreeNode | null): number[] {
+    // find all the different modes in the tree
+
+    if (!root) {
+      console.log("root is ", root);
+      return [];
+    }
+
+    let resultingModes: number[] = [];
+    let queue: BinaryTreeNode[] = [];
+    let elementCount = new Map<number, number>();
+    queue.push(root);
+
+    while (queue.length > 0) {
+      let nodeElement = queue.shift();
+
+      if (nodeElement) {
+        elementCount.set(
+          nodeElement.val,
+          (elementCount.get(nodeElement.val) || 0) + 1
+        );
+
+        if (nodeElement.left) {
+          queue.push(nodeElement.left);
+        }
+
+        if (nodeElement.right) {
+          queue.push(nodeElement.right);
+        }
+      }
+    }
+
+    let max = 0;
+    for (const value of elementCount.values()) {
+      if (value > max) {
+        max = value;
+      }
+    }
+    for (const [key, value] of elementCount.entries()) {
+      if (value === max) {
+        resultingModes.push(key);
+      }
+    }
+
+    return resultingModes;
+  }
+
+  minValueNode(node: BinaryTreeNode | null): BinaryTreeNode | null {
+    // given a subtree it just finds the leftmost smallest node in the tree
+
+    let current = node;
+    while (current && current.left !== null) {
+      current = current.left;
+    }
+    return current;
+  }
+
   search(value: number): BinaryTreeNode | null {
     return this.searchNode(this.rootNode, value);
   }
@@ -143,23 +245,9 @@ class BinaryTree {
 
 let BT = new BinaryTree();
 
-BT.insert(50);
-BT.insert(30);
-BT.insert(70);
-BT.insert(20);
-BT.insert(40);
-BT.insert(10);
-BT.insert(25);
-BT.insert(27);
-BT.insert(60);
-BT.insert(80);
-BT.insert(55);
+BT.insert(0);
+// console.log("level order traversal is ");
+// BT.levelOrderTraversal();
 
-// console.log("postorder traversal is");
-// BT.postOrderTraversal(BT.rootNode);
-
-const result = BT.search(27);
-console.log("result is ", result);
-if (!result) {
-  console.log("could not find the node");
-}
+const resultingModes = BT.findMode(BT.rootNode);
+console.log("resulting modes are ", resultingModes);
