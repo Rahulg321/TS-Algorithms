@@ -164,7 +164,7 @@ class BinaryTree {
   }
 
   findMode(root: BinaryTreeNode | null): number[] {
-    // find all the different modes in the tree
+    // find the maximum modes in the tree and return them as an array
 
     if (!root) {
       console.log("root is ", root);
@@ -212,12 +212,51 @@ class BinaryTree {
 
   minValueNode(node: BinaryTreeNode | null): BinaryTreeNode | null {
     // given a subtree it just finds the leftmost smallest node in the tree
+    // the left most node is considered the predecessor
 
     let current = node;
     while (current && current.left !== null) {
       current = current.left;
     }
     return current;
+  }
+
+  findMinimumDepth(root: BinaryTreeNode | null): number {
+    if (!root) {
+      return 0;
+    }
+
+    if (!root.left && !root.right) {
+      return 1;
+    }
+
+    if (!root.left) {
+      return 1 + this.findMinimumDepth(root.right);
+    }
+
+    if (!root.right) {
+      return 1 + this.findMinimumDepth(root.left);
+    }
+
+    return (
+      1 +
+      Math.min(
+        this.findMinimumDepth(root.left),
+        this.findMinimumDepth(root.right)
+      )
+    );
+  }
+
+  findMaximumDepth(root: BinaryTreeNode | null): number {
+    if (!root) {
+      return 0;
+    }
+
+    let leftDepth = this.findMaximumDepth(root.left);
+    let rightDepth = this.findMaximumDepth(root.right);
+    // find the max of left and right subtrees and add one to account for the current node itself
+    return Math.max(leftDepth, rightDepth) + 1;
+    // compares the depths of left and right subtree
   }
 
   search(value: number): BinaryTreeNode | null {
@@ -241,13 +280,50 @@ class BinaryTree {
       return node;
     }
   }
+
+  hasPathSum(root: BinaryTreeNode, targetSum: number, sum = 0) {
+    // 112:- Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
+
+    if (!root) {
+      return false;
+    }
+
+    sum += root.val;
+
+    if (!root.left && !root.right) {
+      // it is a leaf node
+      return sum === targetSum;
+    }
+
+    return (
+      this.hasPathSum(root.left!, targetSum, sum) ||
+      this.hasPathSum(root.right!, targetSum, sum)
+    );
+  }
+
+  sortedArrayToBST(nums: number[]): BinaryTreeNode | null {
+    let firstElement = nums.shift();
+    let rootNode = new BinaryTreeNode(firstElement!);
+
+    let currentCheckingNode = rootNode;
+  }
 }
 
 let BT = new BinaryTree();
 
-BT.insert(0);
-// console.log("level order traversal is ");
-// BT.levelOrderTraversal();
+BT.insert(5);
 
-const resultingModes = BT.findMode(BT.rootNode);
-console.log("resulting modes are ", resultingModes);
+// BT.insert(3);
+// BT.insert(9);
+// BT.insert(20);
+// BT.insert(null);
+// BT.insert(null);
+// BT.insert(15);
+// BT.insert(7);
+
+console.log("level order traversal is ");
+BT.levelOrderTraversal();
+
+console.log("tree has path sum", BT.hasPathSum(BT.rootNode!, 5));
+
+// const resultingModes = BT.findMode(BT.rootNode);
