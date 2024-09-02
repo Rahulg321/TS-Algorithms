@@ -11,3 +11,6 @@ function climbStairs(n: number, cache: { [key: number]: number } = {}): number {
 
   return cache[n];
 }
+
+function doSomething() {}
+function doSomethingOnce() {}
