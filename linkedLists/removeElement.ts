@@ -9,24 +9,23 @@
  * };
  */
 
-class ListNode {
+class node {
   data: number;
-  next: ListNode | null;
+  next: node | null;
 
-  constructor(data: number, next: ListNode | null){
+  constructor(data: number, next: node | null){
     this.data = data;
     this.next = next;
   }
 }
 
-class Solution {
-function removeElement(head : ListNode, val: number): ListNode | null{
+function removeElement(head : node | null, val: number): node | null{
   while(head != null && head.data == val){
     head = head.next;
   }
 
   let temp = head;
-  let prev: ListNode | null = null;
+  let prev: node | null = null;
 
   // Traverse the rest of the list
   while (temp !== null) {
@@ -34,7 +33,7 @@ function removeElement(head : ListNode, val: number): ListNode | null{
           if (prev !== null) {
               prev.next = temp.next;
           }
-          temp = temp.next;
+          temp = temp.next ;
       } else {
           prev = temp;
           temp = temp.next;
@@ -43,5 +42,4 @@ function removeElement(head : ListNode, val: number): ListNode | null{
 
   return head;
 
-}
 }
