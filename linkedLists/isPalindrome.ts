@@ -1,8 +1,8 @@
 class nodeLinkedList {
   data: number;
-  next: nodeList | null;
+  next: nodeLinkedList | null;
 
-  constructor(data: number, next: nodeList | null) {
+  constructor(data: number, next: nodeLinkedList | null) {
     this.data = data;
     this.next = next;
   }
