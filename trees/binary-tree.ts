@@ -1,4 +1,4 @@
-/* 
+/*
     in a binary tree, each node has exactly two child Nodes, nothing else
     this insert function maintains order of elements in binary tree
     since we are maintaining order this type of tree is known as binary search tree
@@ -29,7 +29,7 @@ class BinaryTree {
   }
 
   insert(value: number | null) {
-    if (value === null || value === undefined) {
+    if (!value) {
       return;
     }
 
@@ -213,3 +213,62 @@ console.log("level order traversal is ");
 BT.levelOrderTraversal();
 
 // const resultingModes = BT.findMode(BT.rootNode);
+
+
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
+ * }
+check if binary tree is symmetric
+*/
+
+function isSymmetric(root: TreeNode | null): boolean {
+
+    if(!root){
+        return false
+    }
+
+    if (!root.left && !root.right) {
+        return true
+    }
+
+    if (!root.left || !root.right) {
+        return false
+    }
+
+    let queue1: (TreeNode | null)[] = [root.left]
+    let queue2: (TreeNode | null)[] = [root.right]
+
+
+     while (queue1.length > 0 && queue2.length > 0) {
+        let node1 = queue1.shift();
+        let node2 = queue2.shift();
+
+        // If both are null, continue to the next pair
+        if (!node1 && !node2) {
+            continue;
+        }
+
+        // If only one is null, or their values differ, it's not symmetric
+        if (!node1 || !node2 || node1.val !== node2.val) {
+            return false;
+        }
+
+        // Enqueue in a mirrored fashion
+        queue1.push(node1.left);
+        queue1.push(node1.right);
+        queue2.push(node2.right); // Notice the swapped order here
+        queue2.push(node2.left);
+    }
+
+    return true
+
+};

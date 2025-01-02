@@ -45,3 +45,28 @@ function merge(nums1: number[], m: number, nums2: number[], n: number): void {
     p--;
   }
 }
+
+
+function pascalsTriangle(numRows: number): number[][] {
+
+    let result = []
+
+    for(let i = 0; i < numRows; i++ ){
+        console.log("i",i)
+        let row = []
+        for(let j = 0; j <= i; j++ ){
+        console.log("j",j)
+            if(j === 0 || j === i){
+                row[j] = 1
+            }else{
+                row[j] = result[i-1][j] + result[i-1][j-1]
+            }
+        }
+
+        result.push(row)
+
+    }
+
+    return result
+
+};

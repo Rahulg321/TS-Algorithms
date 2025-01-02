@@ -44,8 +44,8 @@ function hasPathSum(root: TreeNode, targetSum: number, sum = 0) {
   }
 
   return (
-    this.hasPathSum(root.left!, targetSum, sum) ||
-    this.hasPathSum(root.right!, targetSum, sum)
+    hasPathSum(root.left!, targetSum, sum) ||
+    hasPathSum(root.right!, targetSum, sum)
   );
 }
 
@@ -60,18 +60,18 @@ function findMinimumDepth(root: TreeNode | null): number {
   }
 
   if (!root.left) {
-    return 1 + this.findMinimumDepth(root.right);
+    return 1 + findMinimumDepth(root.right);
   }
 
   if (!root.right) {
-    return 1 + this.findMinimumDepth(root.left);
+    return 1 + findMinimumDepth(root.left);
   }
 
   return (
     1 +
     Math.min(
-      this.findMinimumDepth(root.left),
-      this.findMinimumDepth(root.right)
+      findMinimumDepth(root.left),
+      findMinimumDepth(root.right)
     )
   );
 }
@@ -81,8 +81,8 @@ function findMaximumDepth(root: TreeNode | null): number {
     return 0;
   }
 
-  let leftDepth = this.findMaximumDepth(root.left);
-  let rightDepth = this.findMaximumDepth(root.right);
+  let leftDepth = findMaximumDepth(root.left);
+  let rightDepth = findMaximumDepth(root.right);
   // find the max of left and right subtrees and add one to account for the current node itself
   return Math.max(leftDepth, rightDepth) + 1;
   // compares the depths of left and right subtree
@@ -135,3 +135,31 @@ function findMode(root: TreeNode | null): number[] {
 
   return resultingModes;
 }
+
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
+ * }
+ */
+
+function invertTree(root: TreeNode | null): TreeNode | null {
+    if (!root) {
+        return null;
+    }
+
+    let left = invertTree(root.left);
+    let right = invertTree(root.right);
+
+    root.left = right;
+    root.right = left;
+
+    return root;
+};
