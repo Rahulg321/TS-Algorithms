@@ -272,3 +272,67 @@ function isSymmetric(root: TreeNode | null): boolean {
     return true
 
 };
+
+function sumOfLeftLeaves(root: TreeNode | null): number {
+    let leftLeaves:number[] = []
+    let sumResult = 0
+
+    function _find_left_leaves(node: TreeNode | null, isLeft: boolean) {
+        if (!node) {
+            return null
+        }
+
+        if (!node.left && !node.right && isLeft) {
+            leftLeaves.push(node.val)
+        }
+
+        _find_left_leaves(node.left, true)
+        _find_left_leaves(node.right, false)
+
+    }
+
+    _find_left_leaves(root, false);
+
+    if (leftLeaves.length > 0) {
+
+        for (let i = 0; i < leftLeaves.length; i++) {
+            sumResult += leftLeaves[i]
+        }
+
+        return sumResult
+
+    } else {
+        return sumResult
+    }
+};
+
+
+
+/**
+ *
+ * expects a balanced binary tree, leaf nodes are 0 or 1 and internal nodes are 2 or 3
+ * 2 for OR and 3 for AND
+ * 0 for false and 1 for true
+ *
+ * need to evaluate the tree and return true or false
+ *
+ * @param root - The root node of the tree
+ * @returns true or false if the tree is univalued
+ */
+function evaluateTree(root: TreeNode | null): boolean { // Added : boolean return type
+    if (root === null) {
+        return false;
+    }
+
+    if (root.val === 0 || root.val === 1) {
+        return root.val === 1;
+    }
+
+    if (root.val === 2) {
+        return evaluateTree(root.left) || evaluateTree(root.right);
+    } else if (root.val === 3) {
+        return evaluateTree(root.left) && evaluateTree(root.right);
+    }
+    // It's good practice to have a default return statement, even if it's unreachable
+    return false;
+};

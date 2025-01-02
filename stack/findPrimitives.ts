@@ -74,11 +74,11 @@ function findPrimitiveDecomposition(s:string){
 }
 
 function main(){
-let s = "(()())(())"
-let finalPrimitives = findPrimitiveDecomposition(s)
-let finalResult = removeOuterFromPrimitives(finalPrimitives)
+    let s = "(()())(())"
+    let finalPrimitives = findPrimitiveDecomposition(s)
+    let finalResult = removeOuterFromPrimitives(finalPrimitives)
 
-console.log("final result is", finalResult)
+    console.log("final result is", finalResult)
 
 }
 
