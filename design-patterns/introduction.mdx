@@ -1,0 +1,123 @@
+Here are some of the most commonly asked design patterns in technical interviews and those every developer should know:
+
+---
+
+### **1. Creational Patterns**
+Creational patterns deal with object creation mechanisms, improving flexibility and reuse of existing code.
+
+#### **a. Singleton Pattern**
+- Ensures that a class has only one instance and provides a global point of access to it.
+- **Common Use Case**: Logging, configuration, thread pools, caches.
+
+#### **b. Factory Method**
+- Defines an interface for creating an object but allows subclasses to alter the type of objects that will be created.
+- **Common Use Case**: When the exact type of the object depends on some condition.
+
+#### **c. Abstract Factory**
+- Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+- **Common Use Case**: Cross-platform UI components.
+
+#### **d. Builder**
+- Separates the construction of a complex object from its representation so that the same construction process can create different representations.
+- **Common Use Case**: Constructing objects with many optional parameters.
+
+#### **e. Prototype**
+- Creates new objects by copying an existing object.
+- **Common Use Case**: When object creation is expensive and cloning is a faster alternative.
+
+---
+
+### **2. Structural Patterns**
+Structural patterns deal with the composition of objects or classes to form larger structures.
+
+#### **a. Adapter**
+- Converts the interface of a class into another interface that clients expect.
+- **Common Use Case**: Bridging incompatible interfaces (e.g., legacy code integration).
+
+#### **b. Decorator**
+- Adds responsibilities to an object dynamically.
+- **Common Use Case**: Adding features to GUI components.
+
+#### **c. Proxy**
+- Provides a surrogate or placeholder for another object to control access to it.
+- **Common Use Case**: Lazy initialization, security proxies, or remote object access.
+
+#### **d. Facade**
+- Provides a simplified interface to a larger body of code.
+- **Common Use Case**: Providing a unified API for a complex subsystem.
+
+#### **e. Composite**
+- Composes objects into tree structures to represent part-whole hierarchies.
+- **Common Use Case**: File systems, UI component hierarchies.
+
+#### **f. Flyweight**
+- Reduces memory usage by sharing as much data as possible between similar objects.
+- **Common Use Case**: Caching, text rendering.
+
+---
+
+### **3. Behavioral Patterns**
+Behavioral patterns focus on communication between objects.
+
+#### **a. Strategy**
+- Defines a family of algorithms, encapsulates each one, and makes them interchangeable.
+- **Common Use Case**: Sorting algorithms, payment methods.
+
+#### **b. Observer**
+- Defines a dependency between objects such that when one object changes state, all its dependents are notified.
+- **Common Use Case**: Event handling systems.
+
+#### **c. Command**
+- Encapsulates a request as an object, allowing for parameterization of clients with queues, requests, and operations.
+- **Common Use Case**: Undo/redo functionality.
+
+#### **d. State**
+- Allows an object to alter its behavior when its internal state changes.
+- **Common Use Case**: Finite state machines.
+
+#### **e. Mediator**
+- Reduces the communication complexity between multiple objects or classes.
+- **Common Use Case**: Chat applications, traffic control systems.
+
+#### **f. Chain of Responsibility**
+- Passes a request along a chain of handlers until it is handled.
+- **Common Use Case**: Logging frameworks, event bubbling in UI.
+
+#### **g. Template Method**
+- Defines the skeleton of an algorithm in a method, deferring some steps to subclasses.
+- **Common Use Case**: Workflow processes.
+
+#### **h. Iterator**
+- Provides a way to access elements of a collection without exposing its underlying representation.
+- **Common Use Case**: Iterating over collections like arrays or lists.
+
+---
+
+### **4. Concurrent Patterns**
+Patterns for dealing with multi-threading and concurrency.
+
+#### **a. Producer-Consumer**
+- Separates work into producers (who create tasks) and consumers (who execute tasks).
+- **Common Use Case**: Thread pools, message queues.
+
+#### **b. Singleton with Double-Checked Locking**
+- Ensures thread-safe lazy initialization of a singleton.
+- **Common Use Case**: Resource initialization.
+
+#### **c. Future/Promise**
+- Represents a value that may be available at some point in the future.
+- **Common Use Case**: Asynchronous computations.
+
+#### **d. Circuit Breaker**
+- Prevents an application from trying to perform an operation that's likely to fail.
+- **Common Use Case**: Handling fault tolerance in distributed systems.
+
+---
+
+### **Tips for Interviews**
+1. **Understand the Pattern**: Be ready to explain the intent, structure, and use cases of each pattern.
+2. **Code Examples**: Practice implementing key patterns in a language you’re comfortable with.
+3. **Trade-offs**: Be prepared to discuss when and why you would or wouldn’t use a pattern.
+4. **Real-World Applications**: Think of examples from popular frameworks or libraries that use these patterns.
+
+Would you like detailed examples or code implementations for any of these patterns?
