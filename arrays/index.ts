@@ -70,3 +70,64 @@ function pascalsTriangle(numRows: number): number[][] {
     return result
 
 };
+
+
+
+// received an array of prices, where prices[i] is the price of a given stock on the ith day.
+// You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+function maxProfit(prices:number[]) {
+    let initialProfits = []
+
+    if(prices.length === 1){
+        return 0
+    }
+
+    for (let i = 0 ; i < prices.length; i ++ ){
+        for(let j = i + 1; j < prices.length; j ++){
+            if(prices[i] < prices[j]){
+                let profitOccured = prices[j] - prices[i]
+                initialProfits.push(profitOccured)
+            }else {
+                initialProfits.push(0)
+            }
+        }
+    }
+
+    return Math.max(...initialProfits)
+
+}
+
+
+
+
+
+function lengthOfLongestSubstring(s:string) {
+// find the length of the longest substring without repeating characters
+// uses sliding window approach
+        if(s.length === 0){
+            return 0
+        }
+
+
+        let windowStart = 0
+        let maxLength = 0
+
+        let myChar = new Set()
+
+
+        for(let windowEnd = 0 ; windowEnd < s.length; windowEnd ++){
+            let currentChar = s[windowEnd]
+
+            while(myChar.has(currentChar)){
+                myChar.delete(s[windowStart])
+                windowStart++
+            }
+
+            myChar.add(currentChar)
+
+            maxLength = Math.max(maxLength, windowEnd - windowStart + 1)
+        }
+
+        return maxLength
+
+    }
