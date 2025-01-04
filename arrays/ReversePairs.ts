@@ -46,10 +46,14 @@ function merge(arr: number[], low: number, mid: number, high: number): void {
       right++;
     }
   }
+
+
   while (left <= mid) {
     temp.push(arr[left]);
     left++;
   }
+
+
   while (right <= high) {
     temp.push(arr[right]);
     right++;

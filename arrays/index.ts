@@ -107,8 +107,6 @@ function lengthOfLongestSubstring(s:string) {
         if(s.length === 0){
             return 0
         }
-
-
         let windowStart = 0
         let maxLength = 0
 

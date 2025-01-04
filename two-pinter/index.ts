@@ -60,3 +60,40 @@ function threeSum(nums: number[]) {
 
   return resultSet;
 }
+
+
+
+
+/**
+ * You are given an integer array heights where heights[i] represents the height of the ith bar.
+You may choose any two bars to form a container. Return the maximum amount of water a container can store.
+ * @param heights
+ * @returns number
+ */
+function maxArea(heights:number[]):number {
+        let left = 0
+        let right = heights.length - 1
+
+        let maxArea = 0
+
+        while(left < right){
+
+            let height = Math.min(heights[left],heights[right])
+            // absolute positive value
+            let width = Math.abs(right - left);
+
+            let area = height * width
+
+            maxArea = Math.max(area, maxArea)
+
+            if(heights[left] < heights[right]){
+                left +=1
+            }else{
+                right -=1
+            }
+
+        }
+
+        return maxArea
+
+    }
