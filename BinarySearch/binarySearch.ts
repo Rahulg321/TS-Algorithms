@@ -11,4 +11,3 @@ function binarySearch(arr: number[], target: number): number{
 }
 
 console.log(binarySearch([1, 2, 3, 4, 5], 3));
-
